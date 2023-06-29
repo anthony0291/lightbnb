@@ -1,4 +1,6 @@
 --Writing Insert Queries
+
+-- \i seeds/01_seeds.sql
 -- password bycrpt: $2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.
 
 -- CREATE TABLE users (
@@ -7,15 +9,11 @@
 --   email VARCHAR(255) NOT NULL,
 --   password VARCHAR(255) NOT NULL
 -- );
-INSERT INTO reservations (start_date, end_date, property_id, guest_id)
-VALUES ('2018-09-11', '2018-09-26', 1, 1),
-('2019-01-04', '2019-02-01', 2, 2),
-('2021-10-01', '2021-10-14', 3, 3);
 
 INSERT INTO users (name, email, password)
-VALUES ("John", "john@gmail.com", "$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u."), 
-("Jean", "jean@gmail.com", "$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u."),
-("Sean", "sean@gmail.com", "$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.");
+VALUES ('John', 'john@gmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.'), 
+('Jean', 'jean@gmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.'),
+('Sean', 'sean@gmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
 
 -- CREATE TABLE properties (
 --   id SERIAL PRIMARY KEY NOT NULL,
@@ -38,11 +36,12 @@ VALUES ("John", "john@gmail.com", "$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70t
 
 --   active BOOLEAN NOT NULL DEFAULT TRUE
 -- );
-INSERT INFO properties (owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, parking_spaces, number_of_bathrooms, number_of bedrooms, country, street, city, province, post_code, active)
+INSERT INTO properties (owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, parking_spaces, number_of_bathrooms, number_of_bedrooms, country, street, city, province, post_code)
 VALUES
-(1, "Blanket", "description", "https://i.redd.it/p0ag8p91leu71.png", "https://media.npr.org/assets/img/2023/01/14/this-is-fine_custom-dcb93e90c4e1548ffb16978a5a8d182270c872a9-s1100-c50.jpg", 2, 1, 4, 'Canada', 'Donald', 'Ottawa', 'Ontario', 'K1K 1L5', true),
-(2, "Blanket", "description", "https://i.redd.it/p0ag8p91leu71.png", "https://media.npr.org/assets/img/2023/01/14/this-is-fine_custom-dcb93e90c4e1548ffb16978a5a8d182270c872a9-s1100-c50.jpg", 2, 1, 4, 'Canada', 'Bell', 'Ottawa', 'Ontario', 'K1V 2H9', false),
-(3, "Blanket", "description", "https://i.redd.it/p0ag8p91leu71.png", "https://media.npr.org/assets/img/2023/01/14/this-is-fine_custom-dcb93e90c4e1548ffb16978a5a8d182270c872a9-s1100-c50.jpg", 2, 1, 4, 'Canada', 'Aurugala', 'Ottawa', 'Ontario', 'K1L 1V5', true);
+(1, 'YOU', 'description', 'https://i.redd.it/p0a.png', 'https://media.npr.org/assets.jpg', 200, 1, 2, 3, 'Canada', 'Donald', 'Ottawa', 'Ontario', '12141'),
+(2, 'CAN', 'description', 'https://i.redd.it/p0a.png', 'https://media.npr.org/img.jpg', 300, 1, 2, 3, 'Canada', 'Donald', 'Ottawa', 'Ontario', '12141'),
+(3, 'DO IT!!!!', 'description', 'https://i.redd.it/p0a.png', 'https://media.npr.org/assets.jpg', 100, 1, 2, 3, 'Canada', 'Donald', 'Ottawa', 'Ontario', '12141');
+
 
 -- CREATE TABLE reservations (
 --   id SERIAL PRIMARY KEY NOT NULL,
@@ -52,9 +51,9 @@ VALUES
 --   guest_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 -- );
 INSERT INTO reservations (start_date, end_date, property_id, guest_id)
-VALUES ('2018-09-11', '2018-09-26', 1, 1),
+VALUES ('2018-09-11', '2018-09-26', 2, 3),
 ('2019-01-04', '2019-02-01', 2, 2),
-('2021-10-01', '2021-10-14', 3, 3);
+('2021-10-01', '2021-10-14', 1, 3);
 
 -- CREATE TABLE property_reviews (
 --   id SERIAL PRIMARY KEY NOT NULL,
@@ -64,7 +63,9 @@ VALUES ('2018-09-11', '2018-09-26', 1, 1),
 --   rating SMALLINT NOT NULL DEFAULT 0,
 --   message TEXT
 -- );
+
 INSERT INTO property_reviews (guest_id, property_id, reservation_id, rating, message)
-VALUES (1, 2, 3, 4, "message"),
-(2, 3, 2, 4, "message"),
-(4, 10, 11, 4, "message");
+VALUES 
+(1, 3, 3, 4, 'messages'),
+(2, 1, 2, 4, 'hi'),
+(3, 2, 2, 4, 'sup');
